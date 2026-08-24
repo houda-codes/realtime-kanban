@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+kanban-frontend/node_modules/
+kanban-frontend/dist/
+.env

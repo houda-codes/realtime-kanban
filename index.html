@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebSocket Test</title>
+</head>
+<body>
+    <h2>Real-time test</h2>
+    <input id="messageInput" placeholder="Type something..." />
+    <button onclick="sendMessage()">Send</button>
+    <ul id="messages"></ul>
+
+    <script>
+        // Open a WebSocket connection to our FastAPI server.
+        // Note the "ws://" scheme, not "http://" — that's what tells
+        // the browser to use the WebSocket protocol instead of a normal request.
+        const ws = new WebSocket("ws://localhost:8000/ws");
+
+        // This function runs automatically whenever the SERVER sends
+        // something to this client — no request needed, it just arrives.
+        ws.onmessage = function(event) {
+            const messages = document.getElementById('messages');
+            const li = document.createElement('li');
+            li.textContent = event.data;
+            messages.appendChild(li);
+        };
+
+        function sendMessage() {
+            const input = document.getElementById("messageInput");
+            ws.send(input.value);
+            input.value = "";
+        }
+    </script>
+</body>
+</html>
