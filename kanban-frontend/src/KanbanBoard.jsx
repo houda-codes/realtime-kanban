@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-const WS_HOST = "ws://localhost:8000";
+const WS_HOST = window.location.hostname === "localhost" ? "ws://localhost:8000" : "wss://realtime-kanban-d72k.onrender.com";
 
 const COLUMN_ACCENTS = {
   todo: "#94a3b8",
